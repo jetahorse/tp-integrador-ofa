@@ -35,12 +35,19 @@ public class Receta implements Serializable{
 
     
     // TODO Completar mapeo de fecha
+    @Temporal(TemporalType.DATE)
     private Date fechaCreacion;
 
     // TODO Completar mapeo de relacion
+    @ManyToMany
+    @JoinTable(name="RECETA_INGREDIENTE",
+              joinColumns=@JoinColumn(name="ID_RECETA"),
+              inverseJoinColumns=@JoinColumn(name="ID_INGREDIENTE"))
     private List<Ingrediente> ingredientes;
     
     // TODO Completar mapeo de relacion
+    @ManyToOne
+    @JoinColumn(name="ID_AUTOR")
     private Autor autor;
     
     public Integer getId() {

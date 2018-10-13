@@ -25,6 +25,14 @@ public class IngredienteService {
         // TODO: completar metodo
         // si el ingrediente tiene seteado un ID realiza merge
         // caso contrario realiza un persist
+        if (a.getId()!=null){
+            em.merge(a);
+        }
+        else{
+            em.persist(a);
+        }
+        em.flush();
+        em.refresh(a);
         return a;
     }
 

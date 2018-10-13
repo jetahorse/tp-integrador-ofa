@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="./template01.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="top">
+        Búsqueda Avanzada
+    </ui:define>
+
+    <ui:define name="content">
+        content
+        <h:form id="frmBusquedaAvanzada">
+            <p:outputLabel value="Autor" for="nombreAutor"></p:outputLabel>
+            <p:inputText id="nombreAutor" value="#{recetaController.autorSeleccionado.setNombre(nombreAutor)}"/>
+            <p:outputLabel value="Ingrediente" for="nombreIngrediente"></p:outputLabel>
+            <p:inputText id="nombreIngrediente" value="#{recetaController.ingredienteSeleccionado.descripcion}"/>
+            <p:outputLabel value="Fecha Desde: " for="fechaDesde"></p:outputLabel>
+            <p:inputMask id="fechaDesde" value="#{recetaController.fechaDesde}" mask="99/99/9999" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+            </p:inputMask>
+            <p:outputLabel value="Fecha Hasta: " for="fechaHasta"></p:outputLabel>
+            <p:inputMask id="fechaHasta" value="#{recetaController.fechaHasta}" mask="99/99/9999" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+            </p:inputMask>
+            <p:outputLabel value="Precio Mínimo: " for="precioMin"></p:outputLabel>
+            <p:inputNumber id="precioMin" value="#{recetaController.precioMin}" symbol="AR$" symbolPosition="s" 
+                               decimalSeparator="," thousandSeparator=".">  
+            </p:inputNumber>
+            <p:outputLabel value="Precio Máximo: " for="precioMax"></p:outputLabel>
+            <p:inputNumber id="precioMax" value="#{recetaController.precioMax}" symbol="AR$" symbolPosition="s" 
+                               decimalSeparator="," thousandSeparator=".">  
+            </p:inputNumber>
+            <p:commandButton value="Buscar" action="#{recetaController.doBusquedaAvanzada()}" update="frmBusquedaAvanzada frmListaRecetas"></p:commandButton>
+            <p:commandButton value="Limpiar" update="frmBusquedaAvanzada" resetValues="true"></p:commandButton>
+
+            <h:form id="frmListaRecetas">
+                <p:dataTable id="tblListaRecetas" var="unaReceta" value="#{recetaController.doBusquedaAvanzada}" selection="#{recetaController.recetaSeleccionada}" rowKey="#{unaReceta.id}">
+            <f:facet name="header">
+                Lista de recetas
+            </f:facet>
+            <p:column selectionMode="single" style="width:16px;text-align:center"/>
+            <p:column headerText="Id">
+                <h:outputText value="#{unaReceta.id}" />
+            </p:column>
+            <p:column headerText="Título">
+                <h:outputText value="#{unaReceta.titulo}" />
+            </p:column>
+            <f:facet name="footer">
+                <p:commandButton process="tblListaRecetas" update="frmBusquedaAvanzada" icon="ui-icon-search" value="Seleccionar" />
+                
+            
+            </f:facet>
+        </p:dataTable>
+    </h:form>
+            
+            
+            
+        </h:form>
+    </ui:define>
+
+</ui:composition>
