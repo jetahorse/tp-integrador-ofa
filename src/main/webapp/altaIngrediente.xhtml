@@ -33,7 +33,7 @@
                 <p:commandButton value="Guardar" action="#{ingredienteController.guardar}" ajax="false" disabled="#{empty ingredienteController.ingredienteSeleccionado}"></p:commandButton>
             </div>
             <div class="p-col-4" >
-                <p:commandButton value="Nuevo" action="#{ingredienteController.nuevo}" update="frmDatosIngredientes" disabled="#{not empty ingredienteController.ingredienteSeleccionado}"></p:commandButton>
+                <p:commandButton value="Nuevo" action="#{ingredienteController.nuevo()}" update="frmDatosIngredientes" disabled="#{not empty ingredienteController.ingredienteSeleccionado}"></p:commandButton>
             </div>                
         </div>
     </h:form>
