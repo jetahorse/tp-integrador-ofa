@@ -59,4 +59,22 @@ public class RecetaService {
                 .setParameter("P_FDESDE",fMin, TemporalType.DATE).setParameter("P_FHASTA", fMax, TemporalType.DATE)
                 .setParameter("P_PINICIAL", precioMin).setParameter("P_PFINAL", precioMax).getResultList();
     }
-}
+    
+    public List<Receta> busquedaAvanzada1(String nomAutor,String nomIngrediente,Double precioMin,Double precioMax, Date fMin,Date fMax){
+        if (!nomAutor.isEmpty() && nomIngrediente.isEmpty() && precioMin==null && precioMax==null && fMin==null && fMax==null)
+            return em.createQuery("SELECT r FROM Receta r JOIN r.autor a WHERE r.autor.nombre=:P_NOM_AUTOR")
+                    .setParameter("P_NOM_AUTOR", nomAutor).getResultList();
+        if (!nomAutor.isEmpty() && !nomIngrediente.isEmpty() && precioMin==null && precioMax==null && fMin==null && fMax==null)
+            return em.createQuery("SELECT r FROM Receta r JOIN r.autor a WHERE r.autor.nombre=:P_NOM_AUTOR AND r.ingredientes.descripcion=:P_DESC")
+                    .setParameter("P_NOM_AUTOR", nomAutor).setParameter("P_DESC", nomIngrediente).getResultList();
+        if (!nomAutor.isEmpty() && !nomIngrediente.isEmpty() && precioMin!=null && precioMax!=null && fMin==null && fMax==null)
+            return em.createQuery("SELECT r FROM Receta r JOIN r.autor a WHERE r.autor.nombre=:P_NOM_AUTOR AND r.ingredientes.descripcion=:P_DESC AND r.precio BETWEEN :P_MIN AND :P_MAX")
+                    .setParameter("P_NOM_AUTOR",nomAutor).setParameter("P_DESC", nomIngrediente).setParameter("P_MIN",precioMin).setParameter("P_MAX",precioMax).getResultList();
+        if (!nomAutor.isEmpty() && !nomIngrediente.isEmpty() && precioMin!=null && precioMax!=null && fMin!=null && fMax!=null)
+            return em.createQuery("SELECT r FROM Receta r JOIN r.autor a WHERE r.autor.nombre=:P_NOM_AUTOR AND r.ingredientes.descripcion=:P_DESC AND r.precio BETWEEN :P_MIN AND :P_MAX AND r.fechaCreacion BETWEEN :P_FDESDE AND :P_FHASTA")
+                    .setParameter("P_NOM_AUTOR",nomAutor).setParameter("P_DESC",nomIngrediente).setParameter("P_MIN",precioMin).setParameter("P_MAX",precioMax).setParameter("P_FDESDE",fMin,TemporalType.DATE).setParameter("P_FHASTA",fMax,TemporalType.DATE)
+                    .getResultList();
+        return null;
+
+    }
+}    

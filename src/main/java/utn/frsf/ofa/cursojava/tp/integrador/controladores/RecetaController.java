@@ -43,6 +43,8 @@ public class RecetaController implements Serializable {
     private Date fechaHasta;
     private Double precioMin;
     private Double precioMax;
+    private String nomAutor;
+    private String nomIngrediente;
 
     
     
@@ -152,8 +154,28 @@ public class RecetaController implements Serializable {
     public void setPrecioMax(Double precioMax) {
         this.precioMax = precioMax;
     }
-    public List<Receta> doBusquedaAvanzada(){
+    public String doBusquedaAvanzada(){
         
-        return recetaSrv.busquedaAvanzada(autorSeleccionado, ingredienteSeleccionado, precioMin, precioMax, fechaDesde, fechaDesde);
+        
+        this.listaRecetas=recetaSrv.busquedaAvanzada1(nomAutor, nomIngrediente, precioMin, precioMax, fechaDesde, fechaDesde);
+        this.recetaSeleccionada=this.listaRecetas.get(0);
+        return null;
     }
+
+    public String getNomAutor() {
+        return nomAutor;
+    }
+
+    public void setNomAutor(String nomAutor) {
+        this.nomAutor = nomAutor;
+    }
+
+    public String getNomIngrediente() {
+        return nomIngrediente;
+    }
+
+    public void setNomIngrediente(String nomIngrediente) {
+        this.nomIngrediente = nomIngrediente;
+    }
+    
 }
