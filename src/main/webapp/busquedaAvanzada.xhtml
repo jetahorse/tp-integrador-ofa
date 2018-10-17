@@ -33,7 +33,7 @@
             <p:inputNumber id="precioMax" value="#{recetaController.precioMax}" symbol="AR$" symbolPosition="s" 
                                decimalSeparator="," thousandSeparator=".">  
             </p:inputNumber>
-            <p:commandButton value="Buscar" action="#{recetaController.doBusquedaAvanzada()}" update="frmListaRecetas"></p:commandButton>
+            <p:commandButton value="Buscar" action="#{recetaController.doBusquedaAvanzada()}" update="frmListaRecetas frmBusquedaAvanzada"></p:commandButton>
             <p:commandButton value="Limpiar" update="frmBusquedaAvanzada" resetValues="true"></p:commandButton>
 
             <h:form id="frmListaRecetas">
