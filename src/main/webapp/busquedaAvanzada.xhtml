@@ -34,10 +34,10 @@
                                decimalSeparator="," thousandSeparator=".">  
             </p:inputNumber>
             <p:commandButton value="Buscar" action="#{recetaController.doBusquedaAvanzada()}" update="frmListaRecetas frmBusquedaAvanzada"></p:commandButton>
-            <p:commandButton value="Limpiar" update="frmBusquedaAvanzada" resetValues="true"></p:commandButton>
+            <p:commandButton value="Limpiar" action="#{recetaController.limpiar()}" update="frmBusquedaAvanzada" resetValues="true"></p:commandButton>
 
             <h:form id="frmListaRecetas">
-                <p:dataTable id="tblListaRecetas" var="unaReceta" value="#{recetaController.listaRecetas}" rowKey="#{unaReceta.id}">
+                <p:dataTable id="tblListaRecetas" emptyMessage="No hay recetas"  var="unaReceta" value="#{recetaController.lstBusqRecetas}" rowKey="#{unaReceta.id}">
                 <f:facet name="header">
                 Lista de recetas
                 </f:facet>

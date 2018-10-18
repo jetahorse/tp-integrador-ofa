@@ -49,6 +49,7 @@ public class RecetaController implements Serializable {
     
     
     private List<Receta> listaRecetas;
+    private List<Receta> lstBusqRecetas;
 
     private DualListModel<Ingrediente> ingredientesDisponibles;
     
@@ -157,9 +158,9 @@ public class RecetaController implements Serializable {
     public String doBusquedaAvanzada(){
         
         
-        this.listaRecetas=recetaSrv.busquedaAvanzada1(nomAutor, nomIngrediente, precioMin, precioMax, fechaDesde, fechaDesde);
-        this.recetaSeleccionada=this.listaRecetas.get(0);
-        return null;
+        this.lstBusqRecetas=recetaSrv.busquedaAvanzada1(nomAutor, nomIngrediente, precioMin, precioMax, fechaDesde, fechaDesde);
+        this.recetaSeleccionada=this.lstBusqRecetas.get(0);
+        return "busquedaAvanzada.xhtml";
     }
 
     public String getNomAutor() {
@@ -176,6 +177,24 @@ public class RecetaController implements Serializable {
 
     public void setNomIngrediente(String nomIngrediente) {
         this.nomIngrediente = nomIngrediente;
+    }
+    public String limpiar(){
+        this.nomAutor=null;
+        this.nomIngrediente=null;
+        this.precioMin=null;
+        this.precioMax=null;
+        this.fechaDesde=null;
+        this.fechaHasta=null;
+        
+        return "busquedaAvanzada.xhtml";
+    }
+
+    public List<Receta> getLstBusqRecetas() {
+        return lstBusqRecetas;
+    }
+
+    public void setLstBusqRecetas(List<Receta> lstBusqRecetas) {
+        this.lstBusqRecetas = lstBusqRecetas;
     }
     
 }

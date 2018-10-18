@@ -74,6 +74,7 @@ public class RecetaService {
             return em.createQuery("SELECT r FROM Receta r JOIN r.autor a WHERE r.autor.nombre=:P_NOM_AUTOR AND r.ingredientes.descripcion=:P_DESC AND r.precio BETWEEN :P_MIN AND :P_MAX AND r.fechaCreacion BETWEEN :P_FDESDE AND :P_FHASTA")
                     .setParameter("P_NOM_AUTOR",nomAutor).setParameter("P_DESC",nomIngrediente).setParameter("P_MIN",precioMin).setParameter("P_MAX",precioMax).setParameter("P_FDESDE",fMin,TemporalType.DATE).setParameter("P_FHASTA",fMax,TemporalType.DATE)
                     .getResultList();
+        
         return null;
 
     }
