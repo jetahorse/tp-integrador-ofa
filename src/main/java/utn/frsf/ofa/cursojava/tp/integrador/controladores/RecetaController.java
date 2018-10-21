@@ -50,6 +50,7 @@ public class RecetaController implements Serializable {
     
     private List<Receta> listaRecetas;
     private List<Receta> lstBusqRecetas;
+    private List<Receta> lstRecetasSeleccionadas;
 
     private DualListModel<Ingrediente> ingredientesDisponibles;
     
@@ -65,7 +66,7 @@ public class RecetaController implements Serializable {
     }
 
     public List<Receta> getListaRecetas() {
-        return listaRecetas;
+        return this.listaRecetas;
     }
 
     public void setListaRecetas(List<Receta> listaRecetas) {
@@ -102,6 +103,8 @@ public class RecetaController implements Serializable {
     }
 
     public String nuevo() {
+        this.init();
+        
         this.recetaSeleccionada = new Receta();
         this.recetaSeleccionada.setIngredientes(new ArrayList<>());
         this.ingredientesDisponibles.setTarget(new ArrayList<Ingrediente>());
@@ -159,7 +162,8 @@ public class RecetaController implements Serializable {
         
         
         this.lstBusqRecetas=recetaSrv.busquedaAvanzada1(nomAutor, nomIngrediente, precioMin, precioMax, fechaDesde, fechaDesde);
-        this.recetaSeleccionada=this.lstBusqRecetas.get(0);
+        if ( this.lstBusqRecetas!=null)
+            this.recetaSeleccionada=this.lstBusqRecetas.get(0);
         return "busquedaAvanzada.xhtml";
     }
 
@@ -179,14 +183,14 @@ public class RecetaController implements Serializable {
         this.nomIngrediente = nomIngrediente;
     }
     public String limpiar(){
-        this.nomAutor=null;
-        this.nomIngrediente=null;
+        this.nomAutor="";
+        this.nomIngrediente="";
         this.precioMin=null;
         this.precioMax=null;
         this.fechaDesde=null;
         this.fechaHasta=null;
-        
         return "busquedaAvanzada.xhtml";
+        
     }
 
     public List<Receta> getLstBusqRecetas() {
@@ -195,6 +199,14 @@ public class RecetaController implements Serializable {
 
     public void setLstBusqRecetas(List<Receta> lstBusqRecetas) {
         this.lstBusqRecetas = lstBusqRecetas;
+    }
+
+    public List<Receta> getLstRecetasSeleccionadas() {
+        return lstRecetasSeleccionadas;
+    }
+
+    public void setLstRecetasSeleccionadas(List<Receta> lstRecetasSeleccionadas) {
+        this.lstRecetasSeleccionadas = lstRecetasSeleccionadas;
     }
     
 }

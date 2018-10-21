@@ -49,6 +49,9 @@ public class Receta implements Serializable{
     @ManyToOne
     @JoinColumn(name="ID_AUTOR")
     private Autor autor;
+    @ManyToOne
+    @JoinColumn(name="ID_PEDIDO")
+    private Pedido pedido;
     
     public Integer getId() {
         return id;
@@ -112,6 +115,14 @@ public class Receta implements Serializable{
 
     public void setAutor(Autor autor) {
         this.autor = autor;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
     
 
